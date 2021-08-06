@@ -1,7 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.3'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'com.bmuschko.docker-spring-boot-application' version '7.1.0'
 }
 
 group = 'com.job'
@@ -9,14 +10,26 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
+}
+
+build {
+    finalizedBy dockerBuildImage
+}
+
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+dockerBuildImage {
+    dependsOn build
+    inputDir = file("$rootDir")
+    images = ["medwargg86/spring-app:0.1"]
 }
