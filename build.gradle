@@ -22,14 +22,7 @@ test {
     useJUnitPlatform()
 }
 
-build {
-    finalizedBy dockerBuildImage
-}
-
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
-
 dockerBuildImage {
-    dependsOn build
     inputDir = file("$rootDir")
     images = ["medwargg86/spring-app:0.1"]
 }
