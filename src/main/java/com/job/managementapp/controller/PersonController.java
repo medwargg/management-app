@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping(path = "/management/v1/person")
@@ -20,7 +22,7 @@ public class PersonController {
 
     @GetMapping
     public ResponseEntity<List<Person>> getAllPerson() {
-        List<Person> people = List.of(new Person("John", LocalDate.of(1980, Month.DECEMBER, 20)));
+        List<Person> people = Stream.of(new Person("John", LocalDate.of(1980, Month.DECEMBER, 20))).collect(Collectors.toList());
         return new ResponseEntity<>(people, HttpStatus.OK);
     }
 
