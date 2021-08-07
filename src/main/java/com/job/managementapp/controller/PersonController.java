@@ -22,7 +22,7 @@ public class PersonController {
 
     @GetMapping
     public ResponseEntity<List<Person>> getAllPerson() {
-        List<Person> people = Stream.of(new Person("John", LocalDate.of(1980, Month.DECEMBER, 20))).collect(Collectors.toList());
+        List<Person> people = List.of(new Person("John", LocalDate.of(1980, Month.DECEMBER, 20)));
         return new ResponseEntity<>(people, HttpStatus.OK);
     }
 
