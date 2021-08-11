@@ -1,12 +1,11 @@
 pipeline {
     agent any
 
-    tools{
-        jdk "Java 11"
-    }
-
     stages {
         stage('Build') {
+            tools{
+                jdk "Java 11"
+            }
             steps {
                 sh './gradlew clean build'
             }
