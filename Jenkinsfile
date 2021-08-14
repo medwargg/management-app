@@ -2,6 +2,22 @@ pipeline {
     agent any
 
     stages {
+        stage('Compile') {
+            tools{
+                jdk "Java 11"
+            }
+            steps {
+                sh './gradlew clean compileJava'
+            }
+        }
+        stage('Test') {
+            tools{
+                jdk "Java 11"
+            }
+            steps {
+                sh './gradlew clean test'
+            }
+        }
         stage('Build') {
             tools{
                 jdk "Java 11"
@@ -10,21 +26,11 @@ pipeline {
                 sh './gradlew clean build'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying'
-            }
-        }
     }
 
     post {
         always {
-            echo 'Done'
+            echo 'Demo for Mariana who is very curious'
         }
     }
 }
