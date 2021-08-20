@@ -30,7 +30,7 @@ pipeline {
 
     post {
         always {
-            echo 'Demo for Mariana who is very curious'
+            echo 'Hello world'
         }
     }
 }
